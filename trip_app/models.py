@@ -30,3 +30,12 @@ class Activity(models.Model):
 
 	def __unicode__(self):
 		return self.activ_name
+
+	def save(self):
+		super(Activity, self).save()
+		activ_expenses = Activity.objects.filter(trip = self.trip)
+		total = 0
+		for i_expenses in activ_expenses:
+			total += i_expenses.expenses
+		self.trip.total_expenses = total
+		super(Trip, self.trip).save()

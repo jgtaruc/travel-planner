@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import signals
 from trip_app.models import Trip, Activity
 
 
@@ -11,11 +12,6 @@ class Activ_Inline(admin.StackedInline):
 class Trip_Admin(admin.ModelAdmin):
 	model = Trip
 	inlines = [Activ_Inline]
-	def save_model(self, request, obj, form, change):
-		i_expenses = Activity.objects.filter(trip = obj.pk)
-
-
-
 
 
 admin.site.register(Trip, Trip_Admin)
