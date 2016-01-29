@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/reusables.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/img-transitions.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/login_signup.css'%}"/>
+    <script src="{% static 'trip_app/js/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'trip_app/js/img_transitions.js' %}"></script>
+    <title> Travel Planner </title>
+  </head>
+
+  <body>
+    <!--<img id="spring" class="bg-active" src="../../static/trip_app/images/spring.jpg">
+    <img id="summer" src="../../static/trip_app/images/summer.jpg">
+    <img id="fall" src="../../static/trip_app/images/fall.jpg">
+    <img id="winter" src="../../static/trip_app/images/winter.jpg">
+-->
+  <p class="img-ctrls">
+    <span id="spring" class="" onclick="select_bg()">Spring</span>
+    <span id="summer">Summer</span>
+    <span id="fall">Fall</span>
+    <span id="winter">Winter</span>
+  </p>
+
+    <!-- login signup form -->
+    <div id="login-signup-form">
+      <ul class="tab-group">
+        <li class="tab active"><a href="#login">Log In</a></li>
+        <li class="tab"><a href="#signup">Sign Up</a></li>
+      </ul>
+
+      <!-- login form -->
+      <div id="login-form">
+        <h1>Welcome Back!</h1>
+
+        {% csrf_token %}
+        <form action="{{ request.path }}" method="POST">
+          <div class="field-wrap">
+            <label>Email Address<span class="req">*</span></label>
+            {{form.email}}
+          </div>
+
+          <div class="field-wrap">
+            <label>Password<span class="req">*</span></label>
+            {{form.password}}
+          </div>
+
+          <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+          <button type="submit" value="Login" name="login-btn">Log In</button>
+        </form>
+      </div>
+    </div>
+
+
+      <script>transition()</script>
+  </body>
+</html>

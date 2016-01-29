@@ -12,7 +12,9 @@ class Trip(models.Model):
 	trip_name = models.CharField(max_length = 256)
 	trip_location = models.CharField(max_length = 256)
 	trip_description = models.TextField(max_length = 1024, blank = True)
-	total_expenses = models.DecimalField(default =	Decimal('0.00'), max_digits = 19, decimal_places = 2,validators=[MinValueValidator(0)])
+	total_expenses = models.DecimalField(default =	Decimal('0.00'),
+		max_digits = 19, decimal_places = 2,
+		validators=[MinValueValidator(0)])
 	start_date = models.DateField()
 	end_date = models.DateField()
 
@@ -25,7 +27,9 @@ class Activity(models.Model):
 	activ_name = models.CharField(max_length = 256)
 	activ_location = models.CharField(max_length = 256)
 	activ_description = models.TextField(max_length = 1024, blank = True)
-	expenses = models.DecimalField(default =	Decimal('0.00'), max_digits = 19, decimal_places = 2,validators=[MinValueValidator(0)])
+	expenses = models.DecimalField(default = Decimal('0.00'),
+		max_digits = 19, decimal_places = 2,
+		validators=[MinValueValidator(0)])
 	start_datetime = models.DateTimeField()
 	end_datetime = models.DateTimeField()
 

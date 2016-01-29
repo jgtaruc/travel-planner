@@ -1,0 +1,94 @@
+#login-signup-form{
+  z-index: 2;
+  position: absolute;
+  background: rgba(7, 14, 18, 0.5);
+  padding: 40px;
+  max-width:400px;
+  margin:40px auto;
+  border-radius: 10px;
+  box-shadow:0 4px 120px 4px #383838;
+  text-decoration: none;
+  right: 1%;
+  font-family: fantasy;
+}
+
+.tab-group {
+  list-style:none;
+  padding:0;
+  margin:0 0 40px 0;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+li a{
+  display: inline;
+  width: 50%;
+  font-size: 20px;
+  float: left;
+  text-align: center;
+  cursor:pointer;
+  transition:.8s ease;
+  background-color: gray;
+  color: white;
+  text-decoration: none;
+  outline: none;
+}
+
+li a:hover {
+  background: rgba(26, 177, 136, 0.5);
+}
+
+.active a {
+    background-color: rgb(26, 177, 136);
+}
+
+label {
+  position: absolute;
+  transform: translateY(42px);
+  transition: all 0.25s ease;
+  pointer-events: none;
+  font-size: 14px;
+  color: white;
+}
+
+.req {
+  color: red;
+  outline: none;
+}
+
+input, textarea {
+  font-size:22px;
+  display:block;
+  width:100%;
+  height:100%;
+  padding:5px 10px;
+  margin-bottom: 20px;
+}
+
+.forgot {
+  text-align: right;
+}
+
+.forgot a{
+  color: white;
+  font-size: 14px;
+}
+
+button {
+  border: 0;
+  outline: none;
+  text-transform: uppercase;
+  color: white;
+  background: rgb(26, 177, 136);
+  width: 100%;
+  font-size: 30px;
+}
+
+button:hover {
+  background: rgba(26, 177, 136, .9);
+  cursor: pointer;
+}
