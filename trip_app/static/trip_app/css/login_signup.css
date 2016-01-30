@@ -2,14 +2,26 @@
   z-index: 2;
   position: absolute;
   background: rgba(7, 14, 18, 0.5);
-  padding: 40px;
+  padding: 20px;
+  padding-bottom: 40px;
   max-width:400px;
   margin:40px auto;
   border-radius: 10px;
   box-shadow:0 4px 120px 4px #383838;
   text-decoration: none;
   right: 1%;
-  font-family: fantasy;
+  font-family: Arial;
+}
+
+#signup-form {
+  position: absolute;
+  top: 59px;
+  visibility: hidden;
+
+}
+
+#login-form, #signup-form {
+    transition: 0s;
 }
 
 .tab-group {
@@ -17,9 +29,13 @@
   padding:0;
   margin:0 0 40px 0;
   color: white;
+  position: relative;
+  top: 1%;
+  line-height: 35px;
 }
 
 h1 {
+  margin-top: 0;
   text-align: center;
   color: white;
 }
@@ -27,10 +43,11 @@ h1 {
 li a{
   display: inline;
   width: 50%;
+  height: 40px;
   font-size: 20px;
   float: left;
   text-align: center;
-  cursor:pointer;
+  cursor: pointer;
   transition:.8s ease;
   background-color: gray;
   color: white;
@@ -46,9 +63,13 @@ li a:hover {
     background-color: rgb(26, 177, 136);
 }
 
+.field-wrap {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
 label {
-  position: absolute;
-  transform: translateY(42px);
+  /*transform: translateY(46px);*/
   transition: all 0.25s ease;
   pointer-events: none;
   font-size: 14px;
@@ -66,7 +87,7 @@ input, textarea {
   width:100%;
   height:100%;
   padding:5px 10px;
-  margin-bottom: 20px;
+
 }
 
 .forgot {
@@ -78,13 +99,17 @@ input, textarea {
   font-size: 14px;
 }
 
+.forgot a:hover {
+  color: purple;
+}
+
 button {
   border: 0;
   outline: none;
   text-transform: uppercase;
   color: white;
   background: rgb(26, 177, 136);
-  width: 100%;
+  width: 400px;
   font-size: 30px;
 }
 

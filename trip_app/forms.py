@@ -7,4 +7,10 @@ from custom_auth.models import MyUser
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label='Email')
-    password = forms.CharField(widget = forms.PasswordInput)
+    password = forms.CharField(widget = forms.PasswordInput())
+
+
+class SignUpForm(forms.Form):
+    email = forms.EmailField(label='Email')
+    password = forms.CharField(widget=forms.PasswordInput())
+    password_conf = forms.CharField(widget=forms.PasswordInput())

@@ -9,8 +9,34 @@ img {
   left: 0;
   top: 0;
   background-repeat: no-repeat;
-  transition: 2s ease;
   opacity: 0.0;
+  filter: alpha(opacity=0); /* For IE8 and earlier */
+}
+
+.img-ctrls {
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  display: inline-block;
+  left: 45%;
+}
+
+.img-ctrls span {
+  cursor: pointer;
+  margin-right: 10px;
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background: white;
+  box-shadow: 0 0 3px gray;
+}
+
+.img-ctrls span:hover {
+  background: gray;
+}
+
+.bg {
+  opacity: 0;
   filter: alpha(opacity=0); /* For IE8 and earlier */
 }
 
@@ -19,27 +45,10 @@ img {
   filter: alpha(opacity=1); /* For IE8 and earlier */
 }
 
-.img-ctrls {
-  position: absolute;
-  z-index: 2;
-  bottom: 0;
-  left: 40%;
-
+.img-ctrls .selected {
+  background: gray;
 }
 
-.img-ctrls span {
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.img-ctrls span:hover {
-  background-color: gray;
-}
-
-.bg {
-  opacity: 0;
-}
-
-.selected {
-  background-color: gray;
+img, .selected {
+  transition: 2s ease;
 }
