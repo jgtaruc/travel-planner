@@ -1,23 +1,31 @@
-#login-signup-form{
+#login-signup-form {
   z-index: 2;
   position: absolute;
   background: rgba(7, 14, 18, 0.5);
   padding: 20px;
   padding-bottom: 40px;
-  max-width:400px;
+  max-width:325px;
+  height: 400px;
   margin:40px auto;
   border-radius: 10px;
   box-shadow:0 4px 120px 4px #383838;
   text-decoration: none;
-  right: 1%;
+  
   font-family: Arial;
+}
+
+# {
+  position: relative;
+  height: 2000px;
+  z-index: 2;
+  top:800px;
+  background-color: inherit;
 }
 
 #signup-form {
   position: absolute;
   top: 59px;
   visibility: hidden;
-
 }
 
 #login-form, #signup-form {
@@ -38,6 +46,7 @@ h1 {
   margin-top: 0;
   text-align: center;
   color: white;
+  width: inherit;
 }
 
 li a{
@@ -57,15 +66,20 @@ li a{
 
 li a:hover {
   background: rgba(26, 177, 136, 0.5);
+  color: white;
+  text-decoration: none;
 }
 
 .active a {
     background-color: rgb(26, 177, 136);
+    color: white;
+    text-decoration: none;
 }
 
 .field-wrap {
   display: inline-block;
   margin-bottom: 20px;
+  outline: none;
 }
 
 label {
@@ -84,7 +98,7 @@ label {
 input, textarea {
   font-size:22px;
   display:block;
-  width:100%;
+  width:290px;
   height:100%;
   padding:5px 10px;
 
@@ -109,7 +123,7 @@ button {
   text-transform: uppercase;
   color: white;
   background: rgb(26, 177, 136);
-  width: 400px;
+  width: 290px;
   font-size: 30px;
 }
 

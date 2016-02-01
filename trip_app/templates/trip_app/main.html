@@ -3,20 +3,29 @@
   <head>
     <meta charset="utf-8">
     {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/bootstrap.css'%}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/reusables.css'%}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/img-transitions.css'%}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/login_signup.css'%}"/>
     <script src="{% static 'trip_app/js/jquery-1.11.2.min.js' %}"></script>
     <script src="{% static 'trip_app/js/img_transitions.js' %}"></script>
     <script src="{% static 'trip_app/js/login_signup.js' %}"></script>
+    <script src="{% static 'trip_app/js/bootstrap.js' %}"></script>
+    <script src="{% static 'trip_app/js/adapt_window.js' %}"></script>
     <title> Travel Planner </title>
   </head>
 
-  <body>
-    <img id="spring-bg" class="bg-active" src="../../static/trip_app/images/spring.jpg">
-    <img id="summer-bg" src="../../static/trip_app/images/summer.jpg">
-    <img id="fall-bg" src="../../static/trip_app/images/fall.jpg">
-    <img id="winter-bg" src="../../static/trip_app/images/winter.jpg">
+  <body onresize="resize_elements()" onload="resize_elements()" class="container">
+      <img id="spring-bg" class="bg-active" src="../../static/trip_app/images/spring.jpg">
+      <img id="summer-bg" src="../../static/trip_app/images/summer.jpg">
+      <img id="fall-bg" src="../../static/trip_app/images/fall.jpg">
+      <img id="winter-bg" src="../../static/trip_app/images/winter.jpg">
+    <p class="img-ctrls">
+      <span id="spring" class="selected" onclick="select_spring()"></span>
+      <span id="summer" onclick="select_summer()"></span>
+      <span id="fall" onclick="select_fall()"></span>
+      <span id="winter" onclick="select_winter()"></span>
+    </p>
 
     <!-- login signup form -->
     <div id="login-signup-form">
@@ -72,14 +81,6 @@
 
       </div>
     </div>
-
-    <p class="img-ctrls">
-      <span id="spring" class="selected" onclick="select_spring()"></span>
-      <span id="summer" onclick="select_summer()"></span>
-      <span id="fall" onclick="select_fall()"></span>
-      <span id="winter" onclick="select_winter()"></span>
-    </p>
-
-      <script>transition()</script>
+    <script>transition()</script>
   </body>
 </html>

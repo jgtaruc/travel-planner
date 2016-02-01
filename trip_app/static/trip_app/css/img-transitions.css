@@ -1,23 +1,13 @@
-html {
-  overflow-y: hidden;
-}
-
 img {
-  max-width: 100%;
   z-index: 1;
-  position: absolute;
-  left: 0;
-  top: 0;
   background-repeat: no-repeat;
   opacity: 0.0;
   filter: alpha(opacity=0); /* For IE8 and earlier */
 }
 
 .img-ctrls {
-  position: fixed;
+  position: absolute;
   z-index: 2;
-  bottom: 0;
-  display: inline-block;
   left: 45%;
 }
 
@@ -33,11 +23,6 @@ img {
 
 .img-ctrls span:hover {
   background: gray;
-}
-
-.bg {
-  opacity: 0;
-  filter: alpha(opacity=0); /* For IE8 and earlier */
 }
 
 .bg-active {
