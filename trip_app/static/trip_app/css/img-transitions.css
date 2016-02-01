@@ -1,8 +1,10 @@
 img {
+  position: absolute;
   z-index: 1;
   background-repeat: no-repeat;
   opacity: 0.0;
   filter: alpha(opacity=0); /* For IE8 and earlier */
+  max-width: 100%;
 }
 
 .img-ctrls {
