@@ -3,7 +3,7 @@ login signup form that has 2 tabs(login and signup) and depending
 on the active tab displays the content of either login or signup
 */
 
-/*form container*/
+/*form container style for responsive login signup page*/
 #login-signup-form {
   z-index: 2;
   position: relative;
@@ -19,7 +19,6 @@ on the active tab displays the content of either login or signup
   font-family: Arial;
   top: 100px;
 }
-
 
 /*login and signup tabs container*/
 .tab-group {
@@ -48,6 +47,7 @@ li a{
   outline: none;
   margin-bottom: 10px;
 }
+
 
 
 li a:hover {
@@ -95,7 +95,6 @@ h1 {
 
 /*login signup form label*/
 label {
-  /*transform: translateY(46px);*/
   transition: all 0.25s ease;
   pointer-events: none;
   font-size: 14px;
@@ -114,10 +113,11 @@ label {
 input, textarea {
   font-size:22px;
   display:block;
-  width:360px;
-  height:100%;
+  margin-left: auto;
+  margin-right: auto;
   padding:5px 10px;
-
+  position: relative;
+  width:360px;
 }
 
 
@@ -145,6 +145,7 @@ button {
   background: rgb(26, 177, 136);
   width: 360px;
   font-size: 30px;
+  position: relative;
 }
 
 button:hover {
