@@ -1,3 +1,6 @@
+/*transitioning background style*/
+
+/*tag containing the background image*/
 img {
   position: absolute;
   top:0px;
@@ -6,6 +9,8 @@ img {
   filter: alpha(opacity=0); /* For IE8 and earlier */
 }
 
+
+/*container div holding the img and img-ctrls*/
 #bg {
   width: 100%;
   height: 100%;
@@ -13,6 +18,8 @@ img {
   top: 0px;
 }
 
+
+/*toggle buttons for selecting the background image*/
 #img-ctrls {
   z-index: 2;
   position: relative;
@@ -35,14 +42,18 @@ img {
   background: gray;
 }
 
+
+/*background image status*/
 .bg-active {
   opacity: 1;
   filter: alpha(opacity=1); /* For IE8 and earlier */
 }
 
+
 #img-ctrls .selected {
   background: gray;
 }
+
 
 img, .selected {
   transition: 2s ease;

@@ -1,4 +1,11 @@
 var counter = 1;
+
+/*
+transition function is responsible for dynamic transitioning of
+background images.
+selected classname applies to the img-ctrls.
+bg-active classname applies to the background image.
+*/
 function transition() {
   if(counter == 1) {
     document.getElementById('spring').className = "selected";
@@ -46,6 +53,8 @@ function transition() {
   }
 }
 
+//if user click img-ctrls and selected a toggle button, the below functions will
+//change the background image corresponding background image
 function select_spring() {
   counter = 1;
   transition();
@@ -66,4 +75,7 @@ function select_winter() {
   transition();
 }
 
+
+//set the interval on which the background changes.
+//in this case the background image changes every 8 seconds.
 setInterval(transition, 8000);
