@@ -15,17 +15,21 @@
     <title> Travel Planner </title>
   </head>
 
-  <body onresize="resize_elements()" onload="resize_elements()">
+  <body class="content" onresize="resize_elements()" onload="resize_elements()">
+   <!-- transitioning background -->
+   <div id="bg">
+   <div id="img-ctrls">
+        <span id="spring" class="selected" onclick="select_spring()"></span>
+        <span id="summer" onclick="select_summer()"></span>
+        <span id="fall" onclick="select_fall()"></span>
+        <span id="winter" onclick="select_winter()"></span>
+     </div>
+
       <img id="spring-bg" class="bg-active" src="../../static/trip_app/images/spring.jpg">
       <img id="summer-bg" src="../../static/trip_app/images/summer.jpg">
       <img id="fall-bg" src="../../static/trip_app/images/fall.jpg">
       <img id="winter-bg" src="../../static/trip_app/images/winter.jpg">
-    <p class="img-ctrls">
-      <span id="spring" class="selected" onclick="select_spring()"></span>
-      <span id="summer" onclick="select_summer()"></span>
-      <span id="fall" onclick="select_fall()"></span>
-      <span id="winter" onclick="select_winter()"></span>
-    </p>
+    </div>
 
     <!-- login signup form -->
     <div id="login-signup-form">
@@ -78,7 +82,7 @@
           </div>
 
           <button type="submit" value="SignUp" name="signup-btn">Sign Up</button>
-
+        </form>
       </div>
     </div>
     <script>transition()</script>

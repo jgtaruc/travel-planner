@@ -1,19 +1,27 @@
 img {
   position: absolute;
-  z-index: 1;
-  background-repeat: no-repeat;
-  opacity: 0.0;
+  top:0px;
+  width: 100%;
+  opacity: 0;
   filter: alpha(opacity=0); /* For IE8 and earlier */
-  max-width: 100%;
 }
 
-.img-ctrls {
-  position: absolute;
+#bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+}
+
+#img-ctrls {
   z-index: 2;
-  left: 45%;
+  position: relative;
+  padding-bottom: 40px;
+  max-width:100px;
+  margin: auto;
 }
 
-.img-ctrls span {
+#img-ctrls span {
   cursor: pointer;
   margin-right: 10px;
   display:inline-block;
@@ -23,7 +31,7 @@ img {
   box-shadow: 0 0 3px gray;
 }
 
-.img-ctrls span:hover {
+#img-ctrls span:hover {
   background: gray;
 }
 
@@ -32,7 +40,7 @@ img {
   filter: alpha(opacity=1); /* For IE8 and earlier */
 }
 
-.img-ctrls .selected {
+#img-ctrls .selected {
   background: gray;
 }
 
