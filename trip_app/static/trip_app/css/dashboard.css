@@ -16,8 +16,8 @@
 }
 
 .dropdown {
-  left: auto;
-  right: 0;
+  position: relative;
+  float: right;
 }
 
 .dropdown-menu {
@@ -29,6 +29,17 @@
   margin-left: auto;
   margin-right: auto;
 
+}
+
+#signout, #signout li a{
+  position: relative;
+  text-decoration: none;
+  list-style: outside none none;
+  font-size: 17px;
+  color: gray;
+  margin-right: 0px;
+  margin-left: 0px;
+  top: inherit;
 }
 
 

@@ -33,10 +33,12 @@
             <li class="links"><a href="#">Link</a></li>
             <li class="links"><a href="#">Link</a></li>
             <li class="links"><a href="#">Link</a></li>
+          </ul>
 
+          <ul id="signout" class="nav navbar-nav">
             <li class="dropdown">
               <a id="dropdown-btn" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="caret"></span>
+                {{user.email}}<span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li><a id="profile-link" href="#">Profile</a></li>
