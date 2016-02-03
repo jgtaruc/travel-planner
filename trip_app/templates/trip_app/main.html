@@ -11,7 +11,7 @@
     <script src="{% static 'trip_app/js/img_transitions.js' %}"></script>
     <script src="{% static 'trip_app/js/login_signup.js' %}"></script>
     <script src="{% static 'trip_app/js/bootstrap.js' %}"></script>
-    <title> Travel Planner </title>
+    <title>Travel Planner</title>
   </head>
 
   <body class="content">
@@ -41,8 +41,8 @@
       <div id="login-form">
         <h1>Welcome Back!</h1>
 
-        {% csrf_token %}
         <form action="{{ request.path }}" method="POST">
+            {% csrf_token %}
           <div class="field-wrap">
             {{login_form.email}}
             <label>Email Address<span class="req">*</span></label>
@@ -63,8 +63,8 @@
       <div id="signup-form">
         <h1>Get Started For Free!</h1>
 
-        {% csrf_token %}
         <form action="{{ request.path }}" method="POST">
+          {% csrf_token %}
           <div class="field-wrap">
             {{signup_form.email}}
             <label>Email Address<span class="req">*</span></label>

@@ -1,0 +1,37 @@
+#profile-link:hover, #settings-link:hover, #signout-link:hover,
+#dropdown-btn:hover, .links:hover, .navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background-color: rgb(26, 177, 136);
+}
+
+.navbar {
+  box-shadow:0 4px 120px 4px #383838;
+  background-color: white;
+}
+
+.nav, .navbar-nav {
+  position: relative;
+  left: 35%;
+}
+
+.dropdown {
+  left: auto;
+  right: 0;
+}
+
+.dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+.collapse {
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+
+li a {
+  font-size:  16px;
+}
