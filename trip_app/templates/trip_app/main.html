@@ -41,21 +41,28 @@
       <div id="login-form">
         <h1>Welcome Back!</h1>
 
-        <form action="{{ request.path }}" method="POST">
-            {% csrf_token %}
+        <form id="login-actual-form" action="{{ request.path }}" method="POST">
+          {% csrf_token %}
           <div class="field-wrap">
-            {{login_form.email}}
+            <input name="email" type="email" required>
             <label>Email Address<span class="req">*</span></label>
           </div>
 
           <div class="field-wrap">
-            {{login_form.password}}
+            <input name="password" type="password" required>
             <label>Password<span class="req">*</span></label>
           </div>
 
           <p class="forgot"><a href="#">Forgot Password?</a></p>
 
           <button type="submit" value="Login" name="login-btn">Log In</button>
+            <script>
+              var x = "{{invalid}}";
+              if(x == "True") {
+                alert("Invalid email or password!");
+                window.location.replace('{% url 'home' %}');
+              }
+            </script>
         </form>
       </div>
 
@@ -66,21 +73,33 @@
         <form action="{{ request.path }}" method="POST">
           {% csrf_token %}
           <div class="field-wrap">
-            {{signup_form.email}}
+            <input name="email" type="email" required>
             <label>Email Address<span class="req">*</span></label>
           </div>
 
           <div class="field-wrap">
-            {{signup_form.password}}
+            <input name="password" type="password" required>
             <label>Password<span class="req">*</span></label>
           </div>
 
           <div class="field-wrap">
-            {{signup_form.password_conf}}
+            <input name="password_conf" type="password" required>
             <label>Password Confirmation<span class="req">*</span></label>
           </div>
 
           <button type="submit" value="SignUp" name="signup-btn">Sign Up</button>
+          <script>
+            var x = "{{password_not_match}}";
+            var y = "{{not_unique_email}}";
+            if(x == "password_not_match") {
+              alert("Passwords does not match!");
+              window.location.replace('{% url 'home' %}');
+            }
+            else if(y == "not_unique_email") {
+              alert("Email already taken!");
+              window.location.replace('{% url 'home' %}');
+            }
+          </script>
         </form>
       </div>
     </div>
