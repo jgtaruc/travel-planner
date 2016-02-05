@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/bootstrap.css'%}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/reusables.css'%}"/>
@@ -14,7 +16,7 @@
     <title>Travel Planner</title>
   </head>
 
-  <body class="content">
+  <body onresize="adapt()" onload="adapt()">
    <!-- transitioning background -->
    <div id="bg">
      <div id="img-ctrls">
@@ -44,12 +46,12 @@
         <form id="login-actual-form" action="{{ request.path }}" method="POST">
           {% csrf_token %}
           <div class="field-wrap">
-            <input name="email" type="email" required>
+            <input class="input-lg" name="email" type="email" required>
             <label>Email Address<span class="req">*</span></label>
           </div>
 
           <div class="field-wrap">
-            <input name="password" type="password" required>
+            <input class="input-lg" name="password" type="password" required>
             <label>Password<span class="req">*</span></label>
           </div>
 
@@ -73,17 +75,17 @@
         <form action="{{ request.path }}" method="POST">
           {% csrf_token %}
           <div class="field-wrap">
-            <input name="email" type="email" required>
+            <input class="input-lg" name="email" type="email" required>
             <label>Email Address<span class="req">*</span></label>
           </div>
 
           <div class="field-wrap">
-            <input name="password" type="password" required>
+            <input class="input-lg" name="password" type="password" required>
             <label>Password<span class="req">*</span></label>
           </div>
 
           <div class="field-wrap">
-            <input name="password_conf" type="password" required>
+            <input class="input-lg" name="password_conf" type="password" required>
             <label>Password Confirmation<span class="req">*</span></label>
           </div>
 

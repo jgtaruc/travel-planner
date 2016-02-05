@@ -22,3 +22,12 @@ function signup_active() {
     $("#login-form").css({opacity: 0, visibility: "hidden"}).animate({opacity: 1.0});
   document.getElementById('login-tab').className = "";
 }
+
+function adapt() {
+  if(window.innerWidth < window.innerHeight) {
+    document.getElementById('login-signup-form').style.top = "300px";
+  }
+  else {
+      document.getElementById('login-signup-form').style.top = "100px";
+  }
+}

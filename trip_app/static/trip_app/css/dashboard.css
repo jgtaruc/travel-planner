@@ -3,46 +3,32 @@
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
   background-color: rgb(26, 177, 136);
+  transition: .4s ease;
 }
 
 .navbar {
   box-shadow:0 4px 120px 4px #383838;
   background-color: white;
+  border: none;
+  border-radius: 0px;
 }
 
-.nav, .navbar-nav {
+
+.navbar-center {
+  display: inline-block;
+  float: none;
+}
+
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+li a, .navbar-brand {
+  font-size:  20px;
+}
+
+ul {
   position: relative;
-  left: 35%;
-}
-
-.dropdown {
-  position: relative;
-  float: right;
-}
-
-.dropdown-menu {
-  left: auto;
-  right: 0;
-}
-
-.collapse {
-  margin-left: auto;
-  margin-right: auto;
-
-}
-
-#signout, #signout li a{
-  position: relative;
-  text-decoration: none;
-  list-style: outside none none;
-  font-size: 17px;
-  color: gray;
-  margin-right: 0px;
-  margin-left: 0px;
-  top: inherit;
-}
-
-
-li a {
-  font-size:  16px;
+  vertical-align: middle;
 }
