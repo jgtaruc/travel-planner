@@ -53,8 +53,11 @@ def home(request):
 def dashboard(request):
     user = request.user
     trips = Trip.objects.filter(user=user)
-    return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips})
+    activities = Activity.objects.filter(trip=trips)
+    return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips, 'activities':activities})
 
+def a(b):
+    print(b)
 
 @login_required(login_url='login')
 def signout(request):

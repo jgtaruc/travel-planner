@@ -69,7 +69,7 @@
         </div>
         <ul class="trip-list">
           {% for trip in trips %}
-          <li id="{{trip.id}}" class="trip" onclick="toggle_active({{trip.id}})">
+          <li id="{{trip.id}}" class="trip" onclick="toggle_active({{trip.id}}); show_activities({{trip.id}})">
             <h4 class="trip_name">{{trip.trip_name}}</h4>
             <a class="edit-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <span class="glyphicon glyphicon-edit"></span>
@@ -89,8 +89,21 @@
 
       <div class="activities">
         <h3><strong>Dashboard</strong></h3>
-        <div class="container">
-
+        <div>
+          <ul id="activity-list" class="activity-list">
+            <script>
+              function show_activities(id) {
+              clear();
+              {% for a in activities %}
+                if("{{a.trip.id}}" == id && if_activity_selected(id)) {
+                  show_activity_list("{{a.activ_name}}", "{{a.activ_location}}",
+                    "{{a.activ_description}}", "{{a.total_expenses}}",
+                    "{{a.start_datetime}}", "{{a.end_datetime}}");
+                }
+              {% endfor %}
+              }
+            </script>
+          </ul>
         </div>
       </div>
     </div>
