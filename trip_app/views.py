@@ -52,7 +52,8 @@ def home(request):
 @login_required(login_url='login')
 def dashboard(request):
     user = request.user
-    return render(request, 'trip_app/dashboard.html',{'user':user})
+    trips = Trip.objects.filter(user=user)
+    return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips})
 
 
 @login_required(login_url='login')
