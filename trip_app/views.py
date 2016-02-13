@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from custom_auth.models import MyUser
 from trip_app.models import Trip, Activity
 
-from trip_app.forms import LoginForm, SignUpForm
+from trip_app.forms import LoginForm, SignUpForm, TripForm, ActivityForm
 
 # Create your views here.
 def home(request):
@@ -54,10 +54,11 @@ def dashboard(request):
     user = request.user
     trips = Trip.objects.filter(user=user)
     activities = Activity.objects.filter(trip=trips)
-    return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips, 'activities':activities})
+    trip_form = TripForm()
+    activity_form = ActivityForm()
+    return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips, 'activities':activities,
+        'trip_form': trip_form, "activity_form": activity_form})
 
-def a(b):
-    print(b)
 
 @login_required(login_url='login')
 def signout(request):
