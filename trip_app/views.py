@@ -9,6 +9,8 @@ from trip_app.models import Trip, Activity
 
 from trip_app.forms import LoginForm, SignUpForm, TripForm, ActivityForm
 
+from datetime import datetime
+
 # Create your views here.
 def home(request):
     if request.user.is_authenticated():
@@ -54,8 +56,25 @@ def dashboard(request):
     user = request.user
     trips = Trip.objects.filter(user=user)
     activities = Activity.objects.filter(trip=trips)
-    trip_form = TripForm()
-    activity_form = ActivityForm()
+    if request.method == 'GET':
+        trip_form = TripForm()
+        activity_form = ActivityForm()
+
+    elif 'add-btn' in request.POST:
+        trip_form = TripForm(request.POST)
+        activity_form = ActivityForm()
+        if trip_form.is_valid():
+            trip = Trip()
+            trip.trip_name = trip_form.cleaned_data['trip_name']
+            trip.trip_location = trip_form.cleaned_data['trip_location']
+            trip.description = trip_form.cleaned_data['trip_desc']
+            trip.start_date = trip_form.cleaned_data['trip_start_date']
+            trip.end_date = trip_form.cleaned_data['trip_end_date']
+            trip.total_expenses = 0
+            trip.user = user
+            trip.save()
+            return HttpResponseRedirect(reverse('dashboard'))
+   
     return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips, 'activities':activities,
         'trip_form': trip_form, "activity_form": activity_form})
 

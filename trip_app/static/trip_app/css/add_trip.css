@@ -1,0 +1,23 @@
+.modal-body input {
+	width: 100%;
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.modal-body p {
+	width: 100%;
+}
+
+.modal-body select {
+	height: 46px;
+	margin-right: 5px;
+}
+
+#date_picker {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#date_picker label {
+	width: 130px;
+}

@@ -21,8 +21,8 @@ class TripForm(forms.Form):
     trip_name = forms.CharField(label="Trip name", max_length=256)
     trip_location = forms.CharField(label="Trip location", max_length=256)
     trip_desc = forms.CharField(label="Trip description", max_length=1024)
-    trip_start_date = forms.DateField(label="Trip start date")
-    trip_end_date = forms.DateField(label="Trip end date")
+    trip_start_date = forms.DateField(initial=datetime.now, widget=SelectDateWidget(), label="Trip start date")
+    trip_end_date = forms.DateField(initial=datetime.now, widget=SelectDateWidget(), label="Trip end date")
 
 
 class ActivityForm(forms.Form):
