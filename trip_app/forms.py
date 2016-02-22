@@ -20,7 +20,7 @@ class SignUpForm(forms.Form):
 class TripForm(forms.Form):
     trip_name = forms.CharField(label="Trip name", max_length=256)
     trip_location = forms.CharField(label="Trip location", max_length=256)
-    trip_desc = forms.CharField(label="Trip description", max_length=1024)
+    trip_desc = forms.CharField(widget=forms.Textarea, label="Trip description", max_length=1024)
     trip_start_date = forms.DateField(initial=datetime.now, widget=SelectDateWidget(), label="Trip start date")
     trip_end_date = forms.DateField(initial=datetime.now, widget=SelectDateWidget(), label="Trip end date")
 
@@ -30,5 +30,5 @@ class ActivityForm(forms.Form):
     activ_location = forms.CharField(label="Activity location", max_length=256)
     activ_description = forms.CharField(label="Activity description", max_length=1024)
     
-    activ_start_datetime = forms.DateTimeField()
-    activ_end_datetime = forms.DateTimeField()
+    activ_start_datetime = forms.DateField(initial=datetime.now, widget=SelectDateWidget())
+    activ_end_datetime = forms.DateField(initial=datetime.now, widget=SelectDateWidget())

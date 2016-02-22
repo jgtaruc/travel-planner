@@ -67,7 +67,7 @@ def dashboard(request):
             trip = Trip()
             trip.trip_name = trip_form.cleaned_data['trip_name']
             trip.trip_location = trip_form.cleaned_data['trip_location']
-            trip.description = trip_form.cleaned_data['trip_desc']
+            trip.trip_description = trip_form.cleaned_data['trip_desc']
             trip.start_date = trip_form.cleaned_data['trip_start_date']
             trip.end_date = trip_form.cleaned_data['trip_end_date']
             trip.total_expenses = 0
@@ -77,6 +77,11 @@ def dashboard(request):
    
     return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips, 'activities':activities,
         'trip_form': trip_form, "activity_form": activity_form})
+
+
+def hello(request):
+   print "aaaaaaaaa"
+
 
 
 @login_required(login_url='login')

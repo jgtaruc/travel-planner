@@ -2,6 +2,7 @@
 	width: 100%;
 	position: relative;
 	margin-bottom: 20px;
+	border: 1px solid gray;
 }
 
 .modal-body p {
@@ -11,6 +12,13 @@
 .modal-body select {
 	height: 46px;
 	margin-right: 5px;
+}
+
+.modal-body textarea {
+	width: 100%;
+	border: 1px solid gray;
+	border-radius: 5px;
+	resize: none;
 }
 
 #date_picker {

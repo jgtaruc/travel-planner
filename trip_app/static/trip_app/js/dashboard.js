@@ -50,3 +50,7 @@ function show_activity_list(name, location, description,
   {% endif %}
 {% endfor %}-->
 */
+
+function add_trip() {
+  alert("aa")
+}
