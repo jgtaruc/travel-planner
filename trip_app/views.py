@@ -60,7 +60,7 @@ def dashboard(request):
         trip_form = TripForm()
         activity_form = ActivityForm()
 
-    elif 'add-btn' in request.POST:
+    elif 'add-trip-btn' in request.POST:
         trip_form = TripForm(request.POST)
         activity_form = ActivityForm()
         if trip_form.is_valid():
@@ -74,14 +74,25 @@ def dashboard(request):
             trip.user = user
             trip.save()
             return HttpResponseRedirect(reverse('dashboard'))
+
+    elif 'add-activ-btn' in request.POST:
+        trip_form = TripForm()
+        activity_form = ActivityForm(request.POST)
+        if activity_form.is_valid():
+            activity = Activity()
+            activity.trip = Trip.objects.get(pk=request.POST.get('trip_activ_id'))
+            activity.activ_name = activity_form.cleaned_data['activ_name']
+            activity.activ_location = activity_form.cleaned_data['activ_location']
+            activity.activ_description = activity_form.cleaned_data['activ_description']
+            activity.expenses = activity_form.cleaned_data['activ_expense']
+            activity.start_datetime = activity_form.cleaned_data['activ_start_datetime']
+            activity.end_datetime = activity_form.cleaned_data['activ_end_datetime']
+            activity.save()
+            return HttpResponseRedirect(reverse('dashboard'))
+
    
     return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips, 'activities':activities,
         'trip_form': trip_form, "activity_form": activity_form})
-
-
-def hello(request):
-   print "aaaaaaaaa"
-
 
 
 @login_required(login_url='login')

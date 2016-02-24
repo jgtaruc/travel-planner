@@ -28,7 +28,7 @@ class TripForm(forms.Form):
 class ActivityForm(forms.Form):
     activ_name = forms.CharField(label="Activity name", max_length=256)
     activ_location = forms.CharField(label="Activity location", max_length=256)
-    activ_description = forms.CharField(label="Activity description", max_length=1024)
-    
+    activ_description = forms.CharField(widget=forms.Textarea, label="Activity description", max_length=1024)
+    activ_expense = forms.DecimalField(label="Activity Expense")
     activ_start_datetime = forms.DateField(initial=datetime.now, widget=SelectDateWidget())
     activ_end_datetime = forms.DateField(initial=datetime.now, widget=SelectDateWidget())

@@ -1,3 +1,5 @@
+var id_in_set_id = 0;
+
 function toggle_active(id) {
   var actives = document.getElementsByClassName("trip active");
   if(document.getElementById(id).className == "trip active")
@@ -8,10 +10,13 @@ function toggle_active(id) {
     }
     document.getElementById(id).className = "trip active";
   }
+  id_in_set_id = id; 
 }
 
+
+//for showing the associated activity with the selected trip
 function if_activity_selected(id) {
-  var a = document.getElementById(id);
+  var a = document.getElementById(id); 
   if(a.className == "trip active") {
     return true;
   }
@@ -39,18 +44,7 @@ function show_activity_list(name, location, description,
   ul.appendChild(li);
 }
 
-/*
-<!--{% for a in activities %}
-  {% if a.trip.id == <script>get_selected()</script> %}
-    <script>show_activities()</script>
-    <li class="activs-list">
-      <h4>{{a.activ_name}}</h4>
-      <div class="activ-footer">aaa</div>
-    </li>
-  {% endif %}
-{% endfor %}-->
-*/
 
-function add_trip() {
-  alert("aa")
+function set_id() {
+  document.getElementById("trip_activ_id").value = id_in_set_id.toString();
 }
