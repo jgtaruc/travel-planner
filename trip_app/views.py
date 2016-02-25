@@ -96,6 +96,18 @@ def dashboard(request):
 
 
 @login_required(login_url='login')
+def delete_trip(request, trip_id):
+    trip = Trip.objects.get(pk=trip_id)
+    trip.delete()
+    return HttpResponseRedirect(reverse('dashboard'))
+
+
+@login_required(login_url='login')
+def profile(request):
+    return HttpResponseRedirect(reverse('dashboard'))
+
+
+@login_required(login_url='login')
 def signout(request):
     logout(request)
     return HttpResponseRedirect(reverse('home'))
