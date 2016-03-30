@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from custom_auth.models import MyUser
 from trip_app.models import Trip, Activity
 
-from trip_app.forms import LoginForm, SignUpForm, TripForm, ActivityForm
+from trip_app.forms import LoginForm, SignUpForm, TripForm, ActivityForm, ProfileForm
 
 from datetime import datetime
 
@@ -49,6 +49,7 @@ def home(request):
                 return render(request, 'trip_app/main.html', {'login_form':login_form, 'signup_form':signup_form,
                     'password_not_match':"password_not_match"})
     return render(request, 'trip_app/main.html', {'login_form':login_form, 'signup_form':signup_form, 'invalid': "False"})
+
 
 
 @login_required(login_url='login')
@@ -97,14 +98,28 @@ def dashboard(request):
 
 @login_required(login_url='login')
 def delete_trip(request, trip_id):
-    trip = Trip.objects.get(pk=trip_id)
+    trip = get_object_or_404(Trip, id=trip_id)
     trip.delete()
     return HttpResponseRedirect(reverse('dashboard'))
 
 
 @login_required(login_url='login')
-def profile(request):
+def delete_activity(request, activ_id):
+    activ = get_object_or_404(Activity, id=activ_id)
+    activ.delete()
     return HttpResponseRedirect(reverse('dashboard'))
+
+
+@login_required(login_url='login')
+def edit_activity(request):
+    return HttpResponse("a")
+
+
+@login_required(login_url='login')
+def profile(request):
+    user = request.user
+    profile_form = ProfileForm()
+    return render(request, 'trip_app/profile.html',{'user':user, 'profile_form':profile_form})
 
 
 @login_required(login_url='login')

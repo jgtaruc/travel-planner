@@ -1,68 +1,16 @@
-<!DOCTYPE HTML>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/bootstrap.min.css'%}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/reusables.css'%}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/dashboard.css'%}"/>
+{% extends 'trip_app/header.html' %}
+{% block 'styling' %}
+  {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/add_trip.css'%}"/>
     <script src="{% static 'trip_app/js/dashboard.js' %}"></script>
-    <script src="{% static 'trip_app/js/jquery-1.11.2.min.js' %}"></script>
-    <script src="{% static 'trip_app/js/bootstrap.min.js' %}"></script>
-    <title>Travel Planner</title>
-  </head>
+{% endblock %}
 
-  <body>
-    <!-- responsive navigation bar from bootstrap tutorials -->
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'trip_app.views.dashboard' %}">Travel Planner</a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- center links in the nav bar -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-center">
-            <li class="links"><a href="#">Lorem<span class="sr-only">(current)</span></a></li>
-            <li class="links"><a href="#">Quisque</a></li>
-            <li class="links"><a href="#">Vestibulum</a></li>
-            <li class="links"><a href="#">Mauris</a></li>
-          </ul>
-
-          <!-- dropdown menu -->
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a id="dropdown-btn" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                {{user.email}}<span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a id="profile-link" href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a id="signout-link" href="{% url 'trip_app.views.signout' %}"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
-              </ul>
-            </li>
-          </ul>
-
-        </div>
-      </div>
-    </nav>
-
+{% block 'content' %}
     <div class="dashboard">
       <div class="trips">
         <div class="trip-actions">
           <span>
-            <input type="text" class="form-control" placeholder="Search for...">
             <a href="#" class="btn btn-primary btn-md" data-toggle="modal" data-target="#tripModal"><span class="glyphicon glyphicon-plus"></span> New Trip</a>
           </span>
 
@@ -71,20 +19,18 @@
           {% for trip in trips %}
           <li id="{{trip.id}}" class="trip" onclick="toggle_active({{trip.id}}); show_activities({{trip.id}})">
             <h4 class="trip_name">{{trip.trip_name}}</h4>
-            <a class="edit-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <span class="glyphicon glyphicon-edit"></span>
-            </a>
-
-            <ul class="dropdown-menu edit-menu">
-              <li><a id="add-activ-link" href="#" data-toggle="modal" data-target="#activModal"><span class="glyphicon glyphicon-plus"></span> Add Activity</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a id="edit-link" href="#"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a id="delete-link" href="{% url 'trip_app.views.delete_trip' trip.id %}"><span class="glyphicon glyphicon-remove"></span> Delete</a></li>
-            </ul>
             <h5 class="trip_desc">{{trip.trip_description}}</h5>
             <h6 class="trip-date">{{trip.start_date|date:"m/d/y" }}</h6>
           </li>
+          <!-- dropdown menu for editing trips -->
+          <a class="edit-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-edit"></span></a>
+          <ul class="dropdown-menu edit-trip-menu trip">
+            <li><a id="add-activ-link" href="#" data-toggle="modal" data-target="#activModal"><span class="glyphicon glyphicon-plus"></span> Add Activity</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a id="edit-link" href="#"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a id="delete-link" href="{% url 'trip_app.views.delete_trip' trip.id %}"><span class="glyphicon glyphicon-remove"></span> Delete</a></li>
+          </ul>
           {% endfor %}
         </ul>
       </div>
@@ -96,11 +42,11 @@
             <script>
               function show_activities(id) {
               clear();
-              {% for a in activities %}
-                if("{{a.trip.id}}" == id && if_activity_selected(id)) {
-                  show_activity_list("{{a.activ_name}}", "{{a.activ_location}}",
-                    "{{a.activ_description}}", "{{a.total_expenses}}",
-                    "{{a.start_datetime}}", "{{a.end_datetime}}");
+              {% for activ in activities %}
+                if("{{activ.trip.id}}" == id && if_activity_selected(id)) {
+                  show_activity_list("{{activ.activ_name}}", "{{activ.activ_location}}",
+                    "{{activ.activ_description}}", "{{activ.expenses}}",
+                    "{{activ.start_datetime}}", "{{activ.end_datetime}}", "{{activ.id}}", "{% csrf_token %}");
                 }
               {% endfor %}
               }
@@ -154,6 +100,7 @@
       </div>
     </div>
 
+
     <div class="modal fade" id="activModal" role="dialog">
       <div class="modal-dialog">
 
@@ -166,7 +113,7 @@
               <h4 class="modal-title">New Activity</h4>
             </div>
             <div class="modal-body">
-              <input type="hidden", id="trip_activ_id" name='trip_activ_id'>
+              <input type="hidden" id="trip_activ_id" name='trip_activ_id'>
               <label>Acivity Name: </label>
               <input class="input-lg" name="activ_name"  required>
 
@@ -202,5 +149,4 @@
     </div>
 
 
-  </body>
-</html>
+{% endblock %}

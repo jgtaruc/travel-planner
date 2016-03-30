@@ -1,0 +1,14 @@
+.container {
+	position: relative;
+	margin-top: 30px;
+	padding-left: 20px;
+	background-color: white;
+	height: 500px;
+	border-radius: 5px;
+	color: gray;
+}
+
+.container h2 {
+	padding: 20px;
+	border-bottom: dotted gray 1px;
+}
