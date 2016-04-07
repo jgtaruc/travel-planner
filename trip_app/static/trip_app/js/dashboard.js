@@ -1,16 +1,18 @@
 var id_in_set_id = 0;
 
 function toggle_active(id) {
-  var actives = document.getElementsByClassName("trip active");
-  if(document.getElementById(id).className == "trip active")
-    document.getElementById(id).className = "trip";
-  else {
-    for(i=0; i<actives.length; i++) {
-      actives[i].className = "trip";
+  if(id > 0) {
+    var actives = document.getElementsByClassName("trip active");
+    if(document.getElementById(id).className == "trip active")
+      document.getElementById(id).className = "trip";
+    else {
+      for(i=0; i<actives.length; i++) {
+        actives[i].className = "trip";
+      }
+      document.getElementById(id).className = "trip active";
     }
-    document.getElementById(id).className = "trip active";
+    id_in_set_id = id;
   }
-  id_in_set_id = id; 
 }
 
 
@@ -37,12 +39,14 @@ function show_activity_list(name, location, description,
 
   li.className = "activs-list";
 
-  li.innerHTML = "<h4>" + name + "  -  " + location +
+  li.innerHTML = 
     "<div class=edit-activ>" +
       "<li><a class='glyphicon glyphicon-pencil' data-toggle=modal data-target=#activModal" + id +" href=#></a></li>"+
-      "<li><a class='glyphicon glyphicon-remove' href=/home/delete_activity" + id + "></a></li>" +
+      "<li><a class='glyphicon glyphicon-remove' href=/home/delete_activity/" + id + "></a></li>" +
     "</div>" +
-    "</h4><h5>" + description + "</h5>" +
+    "<h4>Name: " + name + "</h4>" +
+    "<h5>Location: " + location + "</h5>" +
+    "<h5>Description: " + description + "</h5>" +
     "<div class=activ-footer>" + start_datetime +
     "  -  " + end_datetime + "</div>" + 
 
@@ -50,7 +54,7 @@ function show_activity_list(name, location, description,
       "<div class=modal-dialog>" +
 
         "<div class=modal-content>" +
-          "<form action=/home/edit_activity method=POST onsubmit=set_id()>" +
+          "<form action=/home/edit_activity/ method=POST onsubmit=set_id()>" +
             "<div class=modal-header>" +
               csrftoken +
               "<button type=button class=close data-dismiss=modal>&times;</button>" +

@@ -11,10 +11,12 @@ from trip_app.forms import LoginForm, SignUpForm, TripForm, ActivityForm, Profil
 
 from datetime import datetime
 
+from hashlib import sha1
+
 # Create your views here.
 def home(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('dashboard'))
+        return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": 0}))
     if request.method == 'GET':
         login_form = LoginForm()
         signup_form = SignUpForm()
@@ -27,7 +29,7 @@ def home(request):
             if user is None:
                 return render(request, 'trip_app/main.html', {'login_form':login_form, 'signup_form':signup_form, 'invalid': "True"})
             login(request,user)
-            return HttpResponseRedirect(reverse('dashboard'))
+            return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": 0}))
 
     elif 'signup-btn' in request.POST:
         login_form = LoginForm(request.POST)
@@ -44,7 +46,7 @@ def home(request):
                 user = authenticate(username=signup_form.cleaned_data['email'],
                         password=signup_form.cleaned_data['password'])
                 login(request, user)
-                return HttpResponseRedirect(reverse('dashboard'))
+                return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": 0}))
             else:
                 return render(request, 'trip_app/main.html', {'login_form':login_form, 'signup_form':signup_form,
                     'password_not_match':"password_not_match"})
@@ -53,7 +55,7 @@ def home(request):
 
 
 @login_required(login_url='login')
-def dashboard(request):
+def dashboard(request, trip_id):
     user = request.user
     trips = Trip.objects.filter(user=user)
     activities = Activity.objects.filter(trip=trips)
@@ -61,9 +63,20 @@ def dashboard(request):
         trip_form = TripForm()
         activity_form = ActivityForm()
 
-    elif 'add-trip-btn' in request.POST:
+    else:
         trip_form = TripForm(request.POST)
-        activity_form = ActivityForm()
+        activity_form = ActivityForm(request.POST)
+
+    trip_id = trip_id
+    return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips, 'activities':activities,
+        'trip_form': trip_form, "activity_form": activity_form, "trip_id": trip_id})
+
+
+@login_required(login_url='login')
+def add_trip(request):
+    user = request.user
+    if request.method == "POST":
+        trip_form = TripForm(request.POST)
         if trip_form.is_valid():
             trip = Trip()
             trip.trip_name = trip_form.cleaned_data['trip_name']
@@ -74,10 +87,37 @@ def dashboard(request):
             trip.total_expenses = 0
             trip.user = user
             trip.save()
-            return HttpResponseRedirect(reverse('dashboard'))
+    return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip.id}))
 
-    elif 'add-activ-btn' in request.POST:
-        trip_form = TripForm()
+
+@login_required(login_url='login')
+def trip_detail(request, trip_id):
+    user = request.user
+    if request.method == "POST":
+        trip_form = TripForm(request.POST)
+        if trip_form.is_valid():
+            trip = get_object_or_404(Trip, id=trip_id)
+            trip.trip_name = trip_form.cleaned_data['trip_name']
+            trip.trip_location = trip_form.cleaned_data['trip_location']
+            trip.trip_description = trip_form.cleaned_data['trip_desc']
+            trip.start_date = trip_form.cleaned_data['trip_start_date']
+            trip.end_date = trip_form.cleaned_data['trip_end_date']
+            trip.save()
+    return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip_id}))
+
+
+
+@login_required(login_url='login')
+def delete_trip(request, trip_id):
+    trip = get_object_or_404(Trip, id=trip_id)
+    trip.delete()
+    return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": 0}))
+
+
+@login_required(login_url='login')
+def add_activity(request):
+    user = request.user
+    if request.method == "POST":
         activity_form = ActivityForm(request.POST)
         if activity_form.is_valid():
             activity = Activity()
@@ -89,30 +129,36 @@ def dashboard(request):
             activity.start_datetime = activity_form.cleaned_data['activ_start_datetime']
             activity.end_datetime = activity_form.cleaned_data['activ_end_datetime']
             activity.save()
-            return HttpResponseRedirect(reverse('dashboard'))
+            trip_id = request.POST.get('trip_activ_id')
+    return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip_id}))
 
-   
-    return render(request, 'trip_app/dashboard.html',{'user':user, 'trips':trips, 'activities':activities,
-        'trip_form': trip_form, "activity_form": activity_form})
 
 
 @login_required(login_url='login')
-def delete_trip(request, trip_id):
-    trip = get_object_or_404(Trip, id=trip_id)
-    trip.delete()
-    return HttpResponseRedirect(reverse('dashboard'))
+def edit_activity(request):
+    user = request.user
+    if request.method == "POST":
+        activity_form = ActivityForm(request.POST)
+        if activity_form.is_valid():
+            activity_id = request.POST.get('trip_activ_id')
+            activity = get_object_or_404(Activity, id=activity_id)
+            activity.activ_name = activity_form.cleaned_data['activ_name']
+            activity.activ_location = activity_form.cleaned_data['activ_location']
+            activity.activ_description = activity_form.cleaned_data['activ_description']
+            activity.expenses = activity_form.cleaned_data['activ_expense']
+            activity.start_datetime = activity_form.cleaned_data['activ_start_datetime']
+            activity.end_datetime = activity_form.cleaned_data['activ_end_datetime']
+            activity.save()
+            trip_id = request.POST.get('trip_activ_id')
+    return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip_id}))
 
 
 @login_required(login_url='login')
 def delete_activity(request, activ_id):
     activ = get_object_or_404(Activity, id=activ_id)
+    trip_id = activ.trip.id
     activ.delete()
-    return HttpResponseRedirect(reverse('dashboard'))
-
-
-@login_required(login_url='login')
-def edit_activity(request):
-    return HttpResponse("a")
+    return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip_id}))
 
 
 @login_required(login_url='login')

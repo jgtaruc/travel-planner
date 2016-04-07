@@ -84,31 +84,30 @@ ul {
   width: 70%;
 }
 
-.trip-date {
-  position: absolute;
-  right: 0px;
-  top: 35px;
-  padding-right: 5px;
-}
-
 .trip_desc {
-  position: absolute;
+  position: relative;
   color: gray;
   width: 70%;
 }
 
-.edit-btn {
-  position: absolute;
-  right: 10px;
-  top: 20px;
-  font-size: 16px;
+.trip-date {
+  position: relative;
+
   padding-right: 5px;
 }
 
+.edit-btn {
+  position: absolute;
+  right: 0px;
+  top: 5px;
+  font-size: 16px;
+  padding-right: 5px;
+  z-index: 10;
+}
+
 .edit-trip-menu {
-  position: inherit;
+  position: absolute;
   width: auto;
-  top: -15px;
 }
 
 .trip-list .dropdown-menu  {
@@ -170,9 +169,7 @@ ul {
 
 .trip_name, .trip_desc {
   position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 
 .active {
@@ -223,15 +220,15 @@ h3 strong {
   height: 30px;
 }
 
-h1, h2, h3, h4, h5 {
-  word-wrap: break-word
+h1, h2, h3, h4, h5, h6 {
+  word-wrap: break-word;
 }
 
 
 .edit-activ {
   position: relative;
   float: right;
-  top: -10px;
+  top: 0px;
 }
 
 .edit-activ li {
