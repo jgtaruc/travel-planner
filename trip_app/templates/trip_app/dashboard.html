@@ -17,26 +17,25 @@
         </div>
         <ul class="trip-list">
           {% for trip in trips %}
-          <div>
             <li id="{{trip.id}}" class="trip" onclick="toggle_active({{trip.id}}); show_activities({{trip.id}})">
             <div>
-              <a class="edit-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-edit"></span></a>
+              <a class="dropdown-toggle edit-btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-edit"></span></a>
               <ul class="dropdown-menu edit-trip-menu">
-                <li><a id="add-activ-link" href="#" data-toggle="modal" data-target="#activModal"><span class="glyphicon glyphicon-plus"></span> Add Activity</a></li>
+                <li><a  href="#" data-toggle="modal" data-target="#activModal"><span class="glyphicon glyphicon-plus"></span> Add Activity</a></li>
                 <li role="separator" class="divider"></li>
-                <!--<li><a href="{% url 'trip_app.views.trip_detail' trip.id %}"><span class="glyphicon glyphicon glyphicon-eye-open"></span> View in DETAIL</a></li>
-                <li role="separator" class="divider"></li>-->
-                <li><a id="delete-link" href="{% url 'trip_app.views.delete_trip' trip.id %}"><span class="glyphicon glyphicon-remove"></span> Delete</a></li>
+                <li><a data-toggle=modal data-target="#edit_tripModal{{trip.id}}"><span class='glyphicon glyphicon-pencil'></span> Edit</a><li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'trip_app.views.delete_trip' trip.id %}"><span class="glyphicon glyphicon-remove"></span> Delete</a></li>
               </ul>
             </div>
             <div>
                 <h4 class="trip_name">Name: {{trip.trip_name}}</h4>
+                <h5 class="trip_desc">Location: {{trip.trip_location}}</h5>
                 <h5 class="trip_desc">Description: {{trip.trip_description}}</h5>
+                <h5 class="trip_desc">Expense: {{trip.total_expenses}}</h5>
                 <h6 class="trip-date">Date: {{trip.start_date|date:"m/d/y" }} - {{trip.end_date|date:"m/d/y" }}</h6>
             </div>
             </li>
-          </div>
-
           {% endfor %}
         </ul>
       </div>
@@ -52,7 +51,7 @@
                 if("{{activ.trip.id}}" == id && if_activity_selected(id)) {
                   show_activity_list("{{activ.activ_name}}", "{{activ.activ_location}}",
                     "{{activ.activ_description}}", "{{activ.expenses}}",
-                    "{{activ.start_datetime}}", "{{activ.end_datetime}}", "{{activ.id}}", "{% csrf_token %}");
+                    "{{activ.start_date}}", "{{activ.end_date}}", "{{activ.id}}", "{% csrf_token %}");
                 }
               {% endfor %}
               }
@@ -84,12 +83,12 @@
               <label>Trip Location: </label>
               <input class="input-lg" name="trip_location"  required>
 
-              <div id="date_picker">
+              <div>
                 <label>Trip Start Date:</label>
                 <p>{{trip_form.trip_start_date}}<p>
               </div>
 
-              <div id="date_picker">
+              <div>
                 <label>Trip End Date:</label>
                 <p>{{trip_form.trip_end_date}}<p>
               </div>
@@ -106,10 +105,8 @@
       </div>
     </div>
 
-
     <div class="modal fade" id="activModal" role="dialog">
       <div class="modal-dialog">
-
         <!-- Modal content-->
         <div class="modal-content">
           <form action="{% url 'trip_app.views.add_activity' %}" method="POST" onsubmit="set_id()">
@@ -121,7 +118,7 @@
             <div class="modal-body">
               <input type="hidden" id="trip_activ_id" name='trip_activ_id'>
               <label>Acivity Name: </label>
-              <input class="input-lg" name="activ_name"  required>
+              <input class="input-lg" name="activ_name" required>
 
               <label>Activity Description: </label>
               {{activity_form.activ_description}}
@@ -132,16 +129,15 @@
               <label>Activity Expense: </label>
               <input class="input-lg" type="number" step="0.01" min="0.00" value="0.00" name="activ_expense"  required>
 
-              <div id="date_picker">
+              <div>
                 <label>Activity Start Date:</label>
-                <p>{{activity_form.activ_start_datetime}}<p>
+                <p>{{activity_form.activ_start_date}}<p>
               </div>
 
-              <div id="date_picker">
+              <div>
                 <label>Activity End Date:</label>
-                <p>{{activity_form.activ_end_datetime}}<p>
+                <p>{{activity_form.activ_end_date}}<p>
               </div>
-
             </div>
 
             <div class="modal-footer">
@@ -152,6 +148,103 @@
         </div>
 
       </div>
+    </div>
+
+    <div>
+      {% for trip in trips %}
+      <div class="modal fade" id="edit_tripModal{{trip.id}}" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <form action="{% url 'trip_app.views.edit_trip' trip.id %}" method="POST">
+            {% csrf_token %}
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Trip {{trip.trip_name}}</h4>
+              </div>
+              <div class="modal-body">
+                <label>Trip Name: </label>
+                <input class="input-lg" name="trip_name" value="{{trip.trip_name}}" required>
+
+                <label>Trip Description: </label>
+                <textarea class="input-lg" name="trip_desc">{{trip.trip_description}}</textarea>
+
+                <label>Trip Location: </label>
+                <input class="input-lg" name="trip_location" value="{{trip.trip_location}}" required>
+
+                <div id="date_picker">
+                  <label>Trip Start Date:</label>
+                  <p>{{trip_form.trip_start_date}}<p>
+                </div>
+
+                <div id="date_picker">
+                  <label>Trip End Date:</label>
+                  <p>{{trip_form.trip_end_date}}<p>
+                </div>
+
+              </div>
+
+              <div class="modal-footer">
+                <button name="add-trip-btn"  class="btn btn-default">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div>
+    {% for activ in activities %}
+       <div class="modal fade" id="activModal{{activ.id}}" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <form action="{% url 'trip_app.views.edit_activity' activ.id %}" method="POST" onsubmit="set_id()">
+              {% csrf_token %}
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Edit Activity {{activ.activ_name}}</h4>
+                </div>
+                <div class="modal-body">
+                  <label>Activity Name: </label>
+                  <input class="input-lg" name="activ_name" value={{activ.activ_name}} required>
+
+                  <label>Activity Description: </label>
+                  <textarea class="input-lg" name="activ_description" required>{{activ.activ_description}}</textarea>
+
+                  <label>Activity Location: </label>
+                  <input class="input-lg" value={{activ.activ_location}} name="activ_location"  required>
+
+                  <label>Activity Expense: </label>
+                  <input class="input-lg" type="number" value={{activ.expenses}} step="0.01" min="0.00" name="activ_expense"  required>
+
+                  <div id="date_picker">
+                    <label>Activity Start Date:</label>
+                    <p>{{activity_form.activ_start_date}}<p>
+                  </div>
+
+                  <div id="date_picker">
+                    <label>Activity End Date:</label>
+                    <p>{{activity_form.activ_end_date}}<p>
+                  </div>
+
+                </div>
+
+                <div class="modal-footer">
+                  <button name="add-activ-btn"  class="btn btn-default">Save</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+      </div>
+    {% endfor %}
     </div>
 
     

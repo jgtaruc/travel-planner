@@ -30,8 +30,8 @@ class Activity(models.Model):
 	expenses = models.DecimalField(default = Decimal('0.00'),
 		max_digits = 19, decimal_places = 2,
 		validators=[MinValueValidator(0)])
-	start_datetime = models.DateTimeField()
-	end_datetime = models.DateTimeField()
+	start_date = models.DateField(default=datetime.now)
+	end_date = models.DateField(default=datetime.now)
 
 	def __unicode__(self):
 		return self.activ_name

@@ -1,6 +1,4 @@
-body {
-  overflow-y: scroll;
-}
+
 /* navbar styles */
 .navbar {
   box-shadow:0 1px 25px 1px #383838;
@@ -42,7 +40,7 @@ ul {
 
 /*dashboard content styles*/
 .trip-list {
-  padding: 0px;
+  width: 100%;
 }
 
 .trip-actions {
@@ -59,7 +57,6 @@ ul {
   min-height: 110%;
   position: absolute;
   z-index: 1;
-  overflow: auto;
   box-shadow: 0 1px 15px 1px #383838;
 }
 
@@ -108,10 +105,13 @@ ul {
 .edit-trip-menu {
   position: absolute;
   width: auto;
+  left: 100%;
+  top: -1px;
 }
 
+
 .trip-list .dropdown-menu  {
-  background-color: #F5F5F5;
+  background-color: #F5F5F5; 
 }
 
 
@@ -130,7 +130,19 @@ ul {
   border: none;
 }
 
-.dropdown-menu:after {
+.edit-trip-menu:after {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid #F8F8FF;
+  border-bottom: 7px solid transparent;
+  border-top: 7px solid transparent;
+  content: '';
+}
+
+.header-dropdown:after {
   position: absolute;
   top: -6px;
   left: 40%;
@@ -183,12 +195,15 @@ ul {
   width: 75%;
   margin-top: 18px;
   margin-left: 25%;
-  padding-left: 10px;
-  overflow: auto;
+  padding-left: 10px; 
 }
 
 h3 strong {
   color: white;
+}
+
+.dashboard {
+  margin-top: -18px; 
 }
 
 .dashboard ul {

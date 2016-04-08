@@ -91,7 +91,7 @@ def add_trip(request):
 
 
 @login_required(login_url='login')
-def trip_detail(request, trip_id):
+def edit_trip(request, trip_id):
     user = request.user
     if request.method == "POST":
         trip_form = TripForm(request.POST)
@@ -102,9 +102,9 @@ def trip_detail(request, trip_id):
             trip.trip_description = trip_form.cleaned_data['trip_desc']
             trip.start_date = trip_form.cleaned_data['trip_start_date']
             trip.end_date = trip_form.cleaned_data['trip_end_date']
+            trip.user = user
             trip.save()
-    return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip_id}))
-
+    return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip.id}))
 
 
 @login_required(login_url='login')
@@ -126,8 +126,8 @@ def add_activity(request):
             activity.activ_location = activity_form.cleaned_data['activ_location']
             activity.activ_description = activity_form.cleaned_data['activ_description']
             activity.expenses = activity_form.cleaned_data['activ_expense']
-            activity.start_datetime = activity_form.cleaned_data['activ_start_datetime']
-            activity.end_datetime = activity_form.cleaned_data['activ_end_datetime']
+            activity.start_date = activity_form.cleaned_data['activ_start_date']
+            activity.end_date = activity_form.cleaned_data['activ_end_date']
             activity.save()
             trip_id = request.POST.get('trip_activ_id')
     return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip_id}))
@@ -135,21 +135,21 @@ def add_activity(request):
 
 
 @login_required(login_url='login')
-def edit_activity(request):
+def edit_activity(request, activ_id):
     user = request.user
+    trip_id = 0
     if request.method == "POST":
         activity_form = ActivityForm(request.POST)
         if activity_form.is_valid():
-            activity_id = request.POST.get('trip_activ_id')
-            activity = get_object_or_404(Activity, id=activity_id)
+            activity = get_object_or_404(Activity, id=activ_id)
             activity.activ_name = activity_form.cleaned_data['activ_name']
             activity.activ_location = activity_form.cleaned_data['activ_location']
             activity.activ_description = activity_form.cleaned_data['activ_description']
             activity.expenses = activity_form.cleaned_data['activ_expense']
-            activity.start_datetime = activity_form.cleaned_data['activ_start_datetime']
-            activity.end_datetime = activity_form.cleaned_data['activ_end_datetime']
+            activity.start_date = activity_form.cleaned_data['activ_start_date']
+            activity.end_date = activity_form.cleaned_data['activ_end_date']
             activity.save()
-            trip_id = request.POST.get('trip_activ_id')
+            trip_id = activity.trip.id
     return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip_id}))
 
 
@@ -157,6 +157,9 @@ def edit_activity(request):
 def delete_activity(request, activ_id):
     activ = get_object_or_404(Activity, id=activ_id)
     trip_id = activ.trip.id
+    trip = get_object_or_404(Trip, id=trip_id)
+    trip.total_expenses -= activ.expenses
+    trip.save()
     activ.delete()
     return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": trip_id}))
 
