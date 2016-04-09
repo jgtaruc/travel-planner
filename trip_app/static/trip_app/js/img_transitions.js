@@ -8,69 +8,69 @@ bg-active classname applies to the background image.
 */
 function transition() {
   if(counter == 1) {
-    document.getElementById('spring').className = "selected";
-    document.getElementById('summer').className = "";
-    document.getElementById('fall').className = "";
-    document.getElementById('winter').className = "";
-    document.getElementById('spring-bg').className = "bg-active";
-    document.getElementById('summer-bg').className = "";
-    document.getElementById('fall-bg').className = "";
-    document.getElementById('winter-bg').className = "";
+    document.getElementById('travel1').className = "selected";
+    document.getElementById('travel2').className = "";
+    document.getElementById('travel3').className = "";
+    document.getElementById('travel4').className = "";
+    document.getElementById('travel1-bg').className = "bg-active";
+    document.getElementById('travel2-bg').className = "";
+    document.getElementById('travel3-bg').className = "";
+    document.getElementById('travel4-bg').className = "";
     counter++;
   }
   else if(counter == 2) {
-    document.getElementById('spring').className = "";
-    document.getElementById('summer').className = "selected";
-    document.getElementById('fall').className = "";
-    document.getElementById('winter').className = "";
-    document.getElementById('spring-bg').className = "";
-    document.getElementById('summer-bg').className = "bg-active";
-    document.getElementById('fall-bg').className = "";
-    document.getElementById('winter-bg').className = "";
+    document.getElementById('travel1').className = "";
+    document.getElementById('travel2').className = "selected";
+    document.getElementById('travel3').className = "";
+    document.getElementById('travel4').className = "";
+    document.getElementById('travel1-bg').className = "";
+    document.getElementById('travel2-bg').className = "bg-active";
+    document.getElementById('travel3-bg').className = "";
+    document.getElementById('travel4-bg').className = "";
     counter++;
   }
   else if(counter == 3) {
-    document.getElementById('spring').className = "";
-    document.getElementById('summer').className = "";
-    document.getElementById('fall').className = "selected";
-    document.getElementById('winter').className = "";
-    document.getElementById('spring-bg').className = "";
-    document.getElementById('summer-bg').className = "";
-    document.getElementById('fall-bg').className = "bg-active";
-    document.getElementById('winter-bg').className = "";
+    document.getElementById('travel1').className = "";
+    document.getElementById('travel2').className = "";
+    document.getElementById('travel3').className = "selected";
+    document.getElementById('travel4').className = "";
+    document.getElementById('travel1-bg').className = "";
+    document.getElementById('travel2-bg').className = "";
+    document.getElementById('travel3-bg').className = "bg-active";
+    document.getElementById('travel4-bg').className = "";
     counter++;
   }
   else {
-    document.getElementById('spring').className = "";
-    document.getElementById('summer').className = "";
-    document.getElementById('fall').className = "";
-    document.getElementById('winter').className = "selected";
-    document.getElementById('spring-bg').className = "";
-    document.getElementById('summer-bg').className = "";
-    document.getElementById('fall-bg').className = "";
-    document.getElementById('winter-bg').className = "bg-active";
+    document.getElementById('travel1').className = "";
+    document.getElementById('travel2').className = "";
+    document.getElementById('travel3').className = "";
+    document.getElementById('travel4').className = "selected";
+    document.getElementById('travel1-bg').className = "";
+    document.getElementById('travel2-bg').className = "";
+    document.getElementById('travel3-bg').className = "";
+    document.getElementById('travel4-bg').className = "bg-active";
     counter = 1;
   }
 }
 
 //if user click img-ctrls and selected a toggle button, the below functions will
 //change the background image corresponding background image
-function select_spring() {
+function select_travel1() {
   counter = 1;
   transition();
 }
 
-function select_summer() {
+function select_travel2() {
   counter = 2;
   transition();
 }
 
-function select_fall() {
+function select_travel3() {
   counter = 3;
   transition();
 }
 
-function select_winter() {
+function select_travel4() {
   counter = 4;
   transition();
 }

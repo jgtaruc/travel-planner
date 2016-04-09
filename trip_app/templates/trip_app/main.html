@@ -16,21 +16,22 @@
     <title>Travel Planner</title>
   </head>
 
-  <body onresize="adapt()" onload="adapt()">
+  <body>
+  <div>
    <!-- transitioning background -->
    <div id="bg">
-     <div id="img-ctrls">
-        <span id="spring" class="selected" onclick="select_spring()"></span>
-        <span id="summer" onclick="select_summer()"></span>
-        <span id="fall" onclick="select_fall()"></span>
-        <span id="winter" onclick="select_winter()"></span>
+      <div id="img-ctrls">
+        <span id="travel1" class="selected" onclick="select_travel1()"></span>
+        <span id="travel2" onclick="select_travel2()"></span>
+        <span id="travel3" onclick="select_travel3()"></span>
+        <span id="travel4" onclick="select_travel4()"></span>
      </div>
 
-      <img id="spring-bg" class="bg-active" src="../../static/trip_app/images/spring.jpg">
-      <img id="summer-bg" src="../../static/trip_app/images/summer.jpg">
-      <img id="fall-bg" src="../../static/trip_app/images/fall.jpg">
-      <img id="winter-bg" src="../../static/trip_app/images/winter.jpg">
-    </div>
+      <img id="travel1-bg" class="bg-active" src="../../static/trip_app/images/travel1.jpg">
+      <img id="travel2-bg" src="../../static/trip_app/images/travel2.jpg">
+      <img id="travel3-bg" src="../../static/trip_app/images/travel3.jpg">
+      <img id="travel4-bg" src="../../static/trip_app/images/travel4.jpg">
+   </div>
 
     <!-- login signup form -->
     <div id="login-signup-form">
@@ -105,6 +106,7 @@
         </form>
       </div>
     </div>
+
     <script>transition()</script>
   </body>
 </html>

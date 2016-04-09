@@ -38,6 +38,10 @@ ul {
 }
 
 
+#new-trip-btn {
+  width: 100px;
+}
+
 /*dashboard content styles*/
 .trip-list {
   width: 100%;
@@ -54,6 +58,7 @@ ul {
 .trips {
   background: white;
   width: 25%;
+  min-width: 140px;
   min-height: 110%;
   position: absolute;
   z-index: 1;
@@ -195,7 +200,7 @@ ul {
   width: 75%;
   margin-top: 18px;
   margin-left: 25%;
-  padding-left: 10px; 
+  padding-left: 50px; 
 }
 
 h3 strong {

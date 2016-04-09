@@ -1,21 +1,23 @@
 /*transitioning background style*/
-
-/*tag containing the background image*/
-img {
-  position: absolute;
-  top:0px;
-  width: 100%;
-  opacity: 0;
-  filter: alpha(opacity=0); /* For IE8 and earlier */
-}
-
-
 /*container div holding the img and img-ctrls*/
 #bg {
   width: 100%;
   height: 100%;
   position: fixed;
-  top: 0px;
+  top: 0px; 
+}
+
+img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0px;
+  opacity: 0;
+  filter: alpha(opacity=0); /* For IE8 and earlier */
+  background-position: center center;
+  background-repeat: no-repeat;  
+  background-attachment: fixed;
+  background-size: cover; 
 }
 
 
@@ -43,18 +45,37 @@ img {
 }
 
 
-/*background image status*/
-.bg-active {
-  opacity: 1;
-  filter: alpha(opacity=1); /* For IE8 and earlier */
-}
-
-
 #img-ctrls .selected {
   background: gray;
 }
 
 
+.bg, .selected {
+  transition: 2s ease;
+}
+
+.bg-active {
+  opacity: 1;
+  filter: alpha(opacity=1); /* For IE8 and earlier */
+}
+
 img, .selected {
   transition: 2s ease;
+}
+
+
+#bg-travel1{
+    background-image: url("../images/travel1.jpg");
+}
+
+#bg-travel2 {
+    background-image: url("../images/travel2.jpg");
+}
+
+#bg-travel3 {
+    background-image: url("../images/travel3.jpg");
+}
+
+#bg-travel4 {
+    background-image: url("../images/travel4.jpg");
 }

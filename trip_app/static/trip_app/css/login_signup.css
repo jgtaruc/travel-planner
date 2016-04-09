@@ -10,7 +10,7 @@ on the active tab displays the content of either login or signup
   background: rgba(7, 14, 18, 0.5);
   padding: 20px;
   padding-bottom: 40px;
-  width:400px;
+  width:350px;
   height: 400px;
   margin:40px auto;
   border-radius: 10px;
@@ -89,6 +89,9 @@ h1 {
 
 #login-form, #signup-form {
     transition: 0s;
+    position: absolute;
+    right: 25px;
+
 }
 
 

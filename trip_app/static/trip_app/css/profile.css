@@ -21,14 +21,14 @@ input {
   width: 300px;
 }
 
-button {
+.profile-btn {
   border: 0;
   outline: none;
   text-transform: uppercase;
   color: white;
   background: rgb(26, 177, 136);
   width: 100px;
-  margin-left: 30px;
+  margin-left: 45px;
   font-size: 20px;
 }
 
@@ -56,3 +56,5 @@ label {
 	background: rgb(26, 177, 136);
 	cursor: pointer;
 }
+
+
