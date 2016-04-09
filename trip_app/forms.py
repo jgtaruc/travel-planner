@@ -38,5 +38,3 @@ class ProfileForm(forms.Form):
     email = forms.EmailField(label='Email')
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
-    password = forms.CharField(widget=forms.PasswordInput())
-    password_conf = forms.CharField(widget=forms.PasswordInput())

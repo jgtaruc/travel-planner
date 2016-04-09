@@ -3,30 +3,44 @@
 {% block 'styling' %}
   {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'trip_app/css/profile.css'%}"/>
+    <script src="{% static 'trip_app/js/profile.js' %}"></script>
 {% endblock %}
 
 {% block 'content' %}  
-		<form class="profile-form" action="{{request.path}}" method="POST">
-			<h2>{{user.first_name}}'s Profile</h2>
-			{% csrf_token %}
-			<label> First Name: </label>
-			<input class="input-lg" name="first_name" value="{{user.first_name}}" required>
-			<br>
+		<form id="profile-form" class="profile-form" action="{{ request.path }}" method="POST">
+          {% csrf_token %}
+          <div class="field-wrap">
+            <input class="input-lg" name="first_name" type="text" value={{user.first_name}} required>
+            <label>First Name</label>
+          </div>
 
-			<label> Last Name: </label>
-			<input class="input-lg" name="last_name" value="{{user.last_name}}" required>
-			<br>
+          <div class="field-wrap">
+            <input class="input-lg" name="last_name" type="text" value={{user.last_name}} required>
+            <label>Last Name</label>
+          </div>
 
-			<label> Email Address: </label>
-			<input type="email" class="input-lg" name="email" value="{{user.email}}" required>
-			<br>
+          <div class="field-wrap">
+            <input class="input-lg" name="email" type="email" value={{user.email}} required>
+            <label>Email Address</label>
+          </div>
 
-			<label> Password: </label>
-			<input type="password" class="input-lg" name="password" value="{{user.password}}" required>
-			<br>
+          <div class="field-wrap" id="change-password">
+          	<div onclick="change_password()" id="change-password-btn">Change Password</div>
+          </div>
 
-
-			<button type="submit" class="btn btn-default">Save Changes</button>
-        	<a type="button" class="btn btn-default" href="{% url 'trip_app.views.dashboard' 0 %}">Cancel</a>
-		</form>
+          <button type="submit">Save</button>
+          <button type="button" onclick="location.href='{% url 'trip_app.views.dashboard' 0 %}';">Cancel</button>
+          <script>
+            var x = "{{password_not_match}}";
+            var y = "{{not_unique_email}}";
+            if(x == "password_not_match") {
+              alert("Passwords does not match!");
+              window.location.replace('{% url 'profile' %}');
+            }
+            else if(y == "not_unique_email") {
+              alert("Email already taken!");
+              window.location.replace('{% url 'profile' %}');
+            }
+          </script>
+        </form>
 {% endblock %}

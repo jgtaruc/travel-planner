@@ -168,8 +168,55 @@ def delete_activity(request, activ_id):
 def profile(request):
     user = request.user
     profile_form = ProfileForm()
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST)
+        if profile_form.is_valid():
+            user_email = profile_form.cleaned_data['email']
+            if MyUser.objects.filter(email=user_email).exists() and user.email != user_email:
+                return render(request, 'trip_app/profile.html',{'user':user, 'profile_form':profile_form,
+                    'not_unique_email': "not_unique_email"})
+            user.email = profile_form.cleaned_data['email']
+            user.first_name = profile_form.cleaned_data['first_name']
+            user.last_name = profile_form.cleaned_data['last_name']
+            if "password" in request.POST:
+                if request.POST.get("password") != "":
+                    if request.POST.get("password") != request.POST.get("password_conf"):
+                        return render(request, 'trip_app/profile.html',{'user':user, 'profile_form':profile_form,
+                        'password_not_match': "password_not_match"})
+                    user.set_password(request.POST.get("password"))
+                    user.save()
+                    user = authenticate(username=profile_form.cleaned_data['email'],
+                        password=request.POST.get("password"))
+                    login(request, user)
+                    return render(request, 'trip_app/profile.html',{'user':user, 'profile_form':profile_form})
+
+            user.save()
+            
+
     return render(request, 'trip_app/profile.html',{'user':user, 'profile_form':profile_form})
 
+"""
+elif 'signup-btn' in request.POST:
+        login_form = LoginForm(request.POST)
+        signup_form = SignUpForm(request.POST)
+        if signup_form.is_valid():
+            user = MyUser()
+            user.email = signup_form.cleaned_data['email']
+            if MyUser.objects.filter(email=user.email).exists():
+                return render(request, 'trip_app/main.html', {'login_form':login_form, 'signup_form':signup_form,
+                    'not_unique_email':"not_unique_email"})
+            if signup_form.cleaned_data['password'] == signup_form.cleaned_data['password_conf']:
+                user.set_password(signup_form.cleaned_data['password'])
+                user.save()
+                user = authenticate(username=signup_form.cleaned_data['email'],
+                        password=signup_form.cleaned_data['password'])
+                login(request, user)
+                return HttpResponseRedirect(reverse('dashboard', kwargs={"trip_id": 0}))
+            else:
+                return render(request, 'trip_app/main.html', {'login_form':login_form, 'signup_form':signup_form,
+                    'password_not_match':"password_not_match"})
+    return render(request, 'trip_app/main.html', {'login_form':login_form, 'signup_form':signup_form, 'invalid': "False"})
+"""
 
 @login_required(login_url='login')
 def signout(request):

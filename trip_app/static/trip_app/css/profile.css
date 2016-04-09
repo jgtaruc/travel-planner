@@ -1,10 +1,58 @@
 .profile-form {
 	background: white;
 	position: relative;
-	height: 500px; 
-	width: 90%;
+	height: 400px; 
+	width: 400px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 20px;
 	padding: 10px;
 	border-radius: 10px;
+	padding: 20px;
+}
+
+.field-wrap {
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+input {
+  display:block;
+  width: 300px;
+}
+
+button {
+  border: 0;
+  outline: none;
+  text-transform: uppercase;
+  color: white;
+  background: rgb(26, 177, 136);
+  width: 100px;
+  margin-left: 30px;
+  font-size: 20px;
+}
+
+label {
+	color: gray;
+}
+
+
+#change-password-btn {
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	left: 60px;
+	width: 200px;
+	border-style: solid;
+	border-color: #777;
+	border-width: 1px;
+	border-radius: 5px;
+	padding: 3px;
+	color: #777
+}
+
+
+#change-password-btn:hover {
+	background: rgb(26, 177, 136);
+	cursor: pointer;
 }
